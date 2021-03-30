@@ -22,18 +22,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        /*
-        FilterEditor test = new FilterEditor();
-        test.readFile();
-        test.saveFile();
-         */
         launch(args);
     }
-
-
-    // TODO create method to readfile
-    // TODO create method to overwrite file
-    // TODO create method to handle adding/removing #'s
-
 
 }

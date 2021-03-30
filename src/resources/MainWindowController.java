@@ -56,6 +56,10 @@ public class MainWindowController {
 
                 findItem("Wisdom");
 
+                // --------- TESTING
+                //sSystem.out.println(linesInFile);
+                //System.out.println(findItemInList);
+                // ---------
                 sc.close();
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to Read File");
@@ -70,7 +74,6 @@ public class MainWindowController {
 
     @FXML
     public void saveFilterFile(ActionEvent actionEvent) {
-        // saveFile();
         try {
             FileWriter fw = new FileWriter(selectedFile);
             for(String line: linesInFile) {
@@ -111,25 +114,17 @@ public class MainWindowController {
         return "#" + string;
     }
 
-    public void saveFile() {
-        try {
-            FileWriter fw = new FileWriter(selectedFile);
-            for(String line: linesInFile) {
-                fw.write(line + System.lineSeparator());
-            }
-            fw.close();
-        } catch(IOException e) {
-            System.out.println("File not saved");
-        }
-    }
-
+    // TODO # is ignore, Show or Hide works
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
-        if (wisdomCheckBox.isSelected()) {
             for (int i = 0; i < findItemInList.size(); i++) {
-                result = changeShowHide(linesInFile.get(findItemInList.get(i)));
-                linesInFile.set(findItemInList.get(i), result);
+                for(int j = findItemInList.get(i); j >= 0; j--) {
+                    if (linesInFile.get(j).contains("Show")) {
+                        result = changeShowHide(linesInFile.get(j));
+                        linesInFile.set(j, result);
+                        break;
+                    }
+                }
             }
-        }
     }
 }
