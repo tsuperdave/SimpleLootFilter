@@ -4,13 +4,34 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.MainWindowController">
+<AnchorPane fx:id="mainWindow" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.MainWindowController">
    <children>
-      <Button fx:id="loadFilterButton" layoutX="33.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadFilterFile" text="Load Filter" />
-      <Label fx:id="loadFilterLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="19.0" layoutY="72.0" prefHeight="17.0" prefWidth="86.0" text="Loaded Label" visible="false" />
-      <CheckBox fx:id="wisdomCheckBox" layoutX="285.0" layoutY="45.0" mnemonicParsing="false" onAction="#wisdomCheckBoxStateChanged" text="Show / Hide" />
-      <Label fx:id="wisdomLabel" layoutX="285.0" layoutY="24.0" text="Scroll of Wisdom" />
-      <Button fx:id="saveFilterButton" layoutX="34.0" layoutY="149.0" mnemonicParsing="false" onAction="#saveFilterFile" text="Save Filter" />
+      <Button fx:id="loadFilterButton" layoutX="33.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadFilterFile" text="Load Filter">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font></Button>
+      <Label fx:id="loadFilterLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="19.0" layoutY="72.0" prefHeight="17.0" prefWidth="86.0" text="Loaded Label" visible="false">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font></Label>
+      <CheckBox fx:id="wisdomCheckBox" layoutX="285.0" layoutY="45.0" mnemonicParsing="false" onAction="#wisdomCheckBoxStateChanged" text="Show / Hide">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font></CheckBox>
+      <Label fx:id="wisdomLabel" layoutX="285.0" layoutY="24.0" text="Scroll of Wisdom">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font></Label>
+      <Button fx:id="saveFilterButton" layoutX="34.0" layoutY="149.0" mnemonicParsing="false" onAction="#saveFilterFile" text="Save Filter">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font></Button>
+      <Label fx:id="saveFilterLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="44.0" layoutY="184.0" text="Saved Label" visible="false">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -22,6 +22,7 @@ public class MainWindowController {
     public CheckBox wisdomCheckBox;
     public Label wisdomLabel;
     public Button saveFilterButton;
+    public Label saveFilterLabel;
     int fontSize = 12;
     Font poeFont = Font.loadFont(getClass().getResourceAsStream("/resources/Fontin-Regular.ttf"), fontSize);
 
@@ -84,6 +85,8 @@ public class MainWindowController {
         } catch(IOException e) {
             System.out.println("File not saved");
         }
+        saveFilterLabel.setVisible(true);
+        saveFilterLabel.setText("Filter Saved!");
     }
 
     public void findItem(String item) {
@@ -108,18 +111,36 @@ public class MainWindowController {
     }
 
     public String changeShowHide(String string) {
+        switch(string) {
+            case "#Show":
+                return "Hide" + string.substring(5);
+            case "#Hide":
+                return "Show" + string.substring(5);
+            case "Hide":
+                return "Show" + string.substring(4);
+            case "Show":
+                return "Hide" + string.substring(4);
+            default:
+                return "Hide " + string.substring(5);
+        }
+    }
+/*
+    public String changeShowHide(String string) {
         if(string.startsWith("#") || string.startsWith("#Show") || string.startsWith("#Hide")) {
             return string.substring(1);
         }
         return "#" + string;
     }
 
+ */
+
     // TODO # is ignore, Show or Hide works
+    // if line starts with #, ignore else change show to hide
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
             for (int i = 0; i < findItemInList.size(); i++) {
                 for(int j = findItemInList.get(i); j >= 0; j--) {
-                    if (linesInFile.get(j).contains("Show")) {
+                    if (linesInFile.get(j).contains("Show") || linesInFile.get(j).contains("Hide")) {
                         result = changeShowHide(linesInFile.get(j));
                         linesInFile.set(j, result);
                         break;
