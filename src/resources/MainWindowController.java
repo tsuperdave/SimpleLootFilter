@@ -111,7 +111,7 @@ public class MainWindowController {
             }
         }
     }
-
+/*
     public String changeShowHide(String string) {
         switch(string) {
             case "#Show":
@@ -126,15 +126,23 @@ public class MainWindowController {
                 return "Hide " + string.substring(5);
         }
     }
-/*
-    public String changeShowHide(String string) {
-        if(string.startsWith("#") || string.startsWith("#Show") || string.startsWith("#Hide")) {
-            return string.substring(1);
+    */
+
+
+    public String changeShowToHide(String string) {
+        if(string.startsWith("#")) {
+            return "Hide" + string.substring(5);
         }
-        return "#" + string;
+        return "Hide" + string.substring(4);
     }
 
- */
+    public String changeHideToShow(String string) {
+        if(string.startsWith("#")) {
+            return "Show" + string.substring(5);
+        }
+        return "Show" + string.substring(4);
+    }
+
 
     // TODO # is ignore, Show or Hide works
     // if line starts with #, ignore else change show to hide
@@ -142,8 +150,12 @@ public class MainWindowController {
         String result = "";
             for (int i = 0; i < findItemInList.size(); i++) {
                 for(int j = findItemInList.get(i); j >= 0; j--) {
-                    if (linesInFile.get(j).contains("Show") || linesInFile.get(j).contains("Hide")) {
-                        result = changeShowHide(linesInFile.get(j));
+                    if (linesInFile.get(j).contains("Show") && !wisdomCheckBox.isSelected()) {
+                        result = changeShowToHide(linesInFile.get(j));
+                        linesInFile.set(j, result);
+                        break;
+                    } else if(linesInFile.get(j).contains("Hide") && wisdomCheckBox.isSelected()) {
+                        result = changeHideToShow(linesInFile.get(j));
                         linesInFile.set(j, result);
                         break;
                     }
