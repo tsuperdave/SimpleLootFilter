@@ -11,10 +11,7 @@ import javafx.scene.text.Font;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainWindowController {
 
@@ -101,6 +98,8 @@ public class MainWindowController {
             }
         }
 
+        setCheckBoxState(item);
+/*
         for (int i = 0; i < findItemList.size(); i++) {
             for (int j = findItemList.get(i); j >= 0; j--) {
                 if (linesInFile.get(j).contains("Show") && !linesInFile.get(j).startsWith("#")) {
@@ -109,10 +108,20 @@ public class MainWindowController {
                 }
             }
         }
+
+ */
     }
 
-    public void setCheckBoxState () {
+    public void setCheckBoxState (String item) {
+        String nameOfCheckBoxObj = wisdomCheckBox.getText();
+        String nameOfPortalBoxObj = portalCheckBox.getText();
 
+        if(nameOfCheckBoxObj.contains(item.toLowerCase()) || !item.startsWith("#")) {
+            wisdomCheckBox.setSelected(true);
+        }
+        if(nameOfPortalBoxObj.contains(item.toLowerCase()) || !item.startsWith("#")) {
+            portalCheckBox.setSelected(true);
+        }
     }
 
     public String changeShowToHide(String string) {
