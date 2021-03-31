@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class MainWindowController {
     public Label wisdomLabel;
     public Button saveFilterButton;
     public Label saveFilterLabel;
+    public AnchorPane mainWindow;
     int fontSize = 12;
     Font poeFont = Font.loadFont(getClass().getResourceAsStream("/resources/Fontin-Regular.ttf"), fontSize);
 
