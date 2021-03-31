@@ -97,12 +97,10 @@ public class MainWindowController {
         String nameOfCheckBoxObj = wisdomCheckBox.getText();
         String nameOfPortalBoxObj = portalCheckBox.getText();
 
-        if(nameOfCheckBoxObj.contains(item.toLowerCase()) || !item.startsWith("#")) {
+        if(nameOfCheckBoxObj.contains(item.toLowerCase()) && !item.startsWith("#")) {
             wisdomCheckBox.setSelected(true);
-        }
-        if(nameOfPortalBoxObj.contains(item.toLowerCase()) || !item.startsWith("#")) {
+        } else if (nameOfPortalBoxObj.contains(item.toLowerCase()))
             portalCheckBox.setSelected(true);
-        }
     }
 
     public String changeShowToHide(String string) {
