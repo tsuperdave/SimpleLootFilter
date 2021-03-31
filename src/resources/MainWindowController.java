@@ -33,7 +33,6 @@ public class MainWindowController {
     Scanner sc;
     File selectedFile;
     List<String> linesInFile;
-    ArrayList<Integer> itemsInFile;
     HashMap<String, ArrayList<Integer>> itemMap = new HashMap<>();
 
     private void initComponents() {
@@ -61,6 +60,7 @@ public class MainWindowController {
                 }
 
                 findItem("Wisdom");
+                findItem("Portal Scroll");
 
                 sc.close();
             } catch (FileNotFoundException e) {
@@ -91,42 +91,25 @@ public class MainWindowController {
     }
 
     public void findItem(String item) {
-        /*
-        Create empty arr list to store index of item in main List
-        Loop over new list and if any items show 'Show', change state of checkBox to true
-         */
-        itemsInFile = new ArrayList<>();
+
+        ArrayList<Integer> findItemList = new ArrayList<>();
+
         for (String line : linesInFile) {
             if (line.contains(item) && line.contains("BaseType")) {
-                itemsInFile.add(linesInFile.indexOf(line));
+                findItemList.add(linesInFile.indexOf(line));
+                itemMap.putIfAbsent(item, findItemList);
             }
         }
 
-        for (int i = 0; i < itemsInFile.size(); i++) {
-            for (int j = itemsInFile.get(i); j >= 0; j--) {
+        for (int i = 0; i < findItemList.size(); i++) {
+            for (int j = findItemList.get(i); j >= 0; j--) {
                 if (linesInFile.get(j).contains("Show") && !linesInFile.get(j).startsWith("#")) {
                     wisdomCheckBox.setSelected(true);
+                    portalCheckBox.setSelected(true);
                 }
             }
         }
     }
-/*
-    public String changeShowHide(String string) {
-        switch(string) {
-            case "#Show":
-                return "Hide" + string.substring(5);
-            case "#Hide":
-                return "Show" + string.substring(5);
-            case "Hide":
-                return "Show" + string.substring(4);
-            case "Show":
-                return "Hide" + string.substring(4);
-            default:
-                return "Hide " + string.substring(5);
-        }
-    }
-    */
-
 
     public String changeShowToHide(String string) {
         if(string.startsWith("#")) {
@@ -142,13 +125,12 @@ public class MainWindowController {
         return "Show" + string.substring(4);
     }
 
-
     // TODO # is ignore, Show or Hide works
     // if line starts with #, ignore else change show to hide
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
-        for (int i = 0; i < itemsInFile.size(); i++) {
-            for(int j = itemsInFile.get(i); j >= 0; j--) {
+        for (int i = 0; i < itemMap.get("Wisdom").size(); i++) {
+            for(int j = itemMap.get("Wisdom").get(i); j >= 0; j--) {
                 if (linesInFile.get(j).contains("Show") && !wisdomCheckBox.isSelected()) {
                     result = changeShowToHide(linesInFile.get(j));
                     linesInFile.set(j, result);
@@ -163,14 +145,9 @@ public class MainWindowController {
     }
 
     public void portalCheckBoxStateChanged(ActionEvent actionEvent) {
-    }
-
-    // TODO may need to add hashmap of arrlists for each item, I.E. "Wisdom", "wisdomArrList<Integer>
-    /*
-    public void portalCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
-        for (int i = 0; i < findItemInList.size(); i++) {
-            for(int j = findItemInList.get(i); j >= 0; j--) {
+        for (int i = 0; i < itemMap.get("Portal Scroll").size(); i++) {
+            for(int j = itemMap.get("Portal Scroll").get(i); j >= 0; j--) {
                 if (linesInFile.get(j).contains("Show") && !portalCheckBox.isSelected()) {
                     result = changeShowToHide(linesInFile.get(j));
                     linesInFile.set(j, result);
@@ -183,5 +160,4 @@ public class MainWindowController {
             }
         }
     }
-   */
 }
