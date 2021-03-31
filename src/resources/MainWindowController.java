@@ -111,6 +111,10 @@ public class MainWindowController {
         }
     }
 
+    public void setCheckBoxState () {
+
+    }
+
     public String changeShowToHide(String string) {
         if(string.startsWith("#")) {
             return "Hide" + string.substring(5);
@@ -125,8 +129,6 @@ public class MainWindowController {
         return "Show" + string.substring(4);
     }
 
-    // TODO # is ignore, Show or Hide works
-    // if line starts with #, ignore else change show to hide
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
         for (int i = 0; i < itemMap.get("Wisdom").size(); i++) {
