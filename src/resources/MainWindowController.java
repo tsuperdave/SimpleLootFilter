@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.*;
+import java.util.Timer;
 
 public class MainWindowController {
 
@@ -24,23 +25,16 @@ public class MainWindowController {
     public AnchorPane mainWindow;
     public CheckBox portalCheckBox;
     public Label portalLabel;
-    int fontSize = 12;
-    Font poeFont = Font.loadFont(getClass().getResourceAsStream("/resources/Fontin-Regular.ttf"), fontSize);
 
     Scanner sc;
     File selectedFile;
     List<String> linesInFile;
     HashMap<String, ArrayList<Integer>> itemMap = new HashMap<>();
 
-    private void initComponents() {
-
-        // TODO setup labels/checkbox/buttons here
-        loadFilterButton.setFont(poeFont);
-
-    }
-
     @FXML
     void loadFilterFile(ActionEvent actionEvent) {
+        saveFilterLabel.setVisible(false);
+
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\My Games\\Path of Exile"));
         fc.setFileFilter(new FileNameExtensionFilter(".filter", "filter"));
@@ -88,7 +82,6 @@ public class MainWindowController {
     }
 
     public void findItem(String item) {
-
         ArrayList<Integer> findItemList = new ArrayList<>();
 
         for (String line : linesInFile) {
@@ -97,19 +90,7 @@ public class MainWindowController {
                 itemMap.putIfAbsent(item, findItemList);
             }
         }
-
         setCheckBoxState(item);
-/*
-        for (int i = 0; i < findItemList.size(); i++) {
-            for (int j = findItemList.get(i); j >= 0; j--) {
-                if (linesInFile.get(j).contains("Show") && !linesInFile.get(j).startsWith("#")) {
-                    wisdomCheckBox.setSelected(true);
-                    portalCheckBox.setSelected(true);
-                }
-            }
-        }
-
- */
     }
 
     public void setCheckBoxState (String item) {
@@ -139,6 +120,8 @@ public class MainWindowController {
     }
 
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
+        saveFilterLabel.setVisible(false);
+
         String result = "";
         for (int i = 0; i < itemMap.get("Wisdom").size(); i++) {
             for(int j = itemMap.get("Wisdom").get(i); j >= 0; j--) {
@@ -156,6 +139,8 @@ public class MainWindowController {
     }
 
     public void portalCheckBoxStateChanged(ActionEvent actionEvent) {
+        saveFilterLabel.setVisible(false);
+
         String result = "";
         for (int i = 0; i < itemMap.get("Portal Scroll").size(); i++) {
             for(int j = itemMap.get("Portal Scroll").get(i); j >= 0; j--) {
