@@ -16,11 +16,11 @@
          <font>
             <Font name="Caladea" size="12.0" />
          </font></Label>
-      <CheckBox fx:id="wisdomCheckBox" layoutX="285.0" layoutY="45.0" mnemonicParsing="false" onAction="#wisdomCheckBoxStateChanged" text="Show / Hide">
+      <CheckBox fx:id="wisdomCheckBox" layoutX="285.0" layoutY="33.0" mnemonicParsing="false" onAction="#wisdomCheckBoxStateChanged" text="Show / Hide">
          <font>
             <Font name="Caladea" size="12.0" />
          </font></CheckBox>
-      <Label fx:id="wisdomLabel" layoutX="285.0" layoutY="24.0" text="Scroll of Wisdom">
+      <Label fx:id="wisdomLabel" layoutX="284.0" layoutY="14.0" text="Scroll of Wisdom">
          <font>
             <Font name="Caladea" size="12.0" />
          </font></Label>
@@ -29,6 +29,16 @@
             <Font name="Caladea" size="12.0" />
          </font></Button>
       <Label fx:id="saveFilterLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="44.0" layoutY="184.0" text="Saved Label" visible="false">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="portalCheckBox" layoutX="285.0" layoutY="81.0" mnemonicParsing="false" onAction="#portalCheckBoxStateChanged" text="Show / Hide">
+         <font>
+            <Font name="Caladea" size="12.0" />
+         </font>
+      </CheckBox>
+      <Label fx:id="portalLabel" layoutX="285.0" layoutY="64.0" text="Portal Scroll">
          <font>
             <Font name="Caladea" size="12.0" />
          </font>

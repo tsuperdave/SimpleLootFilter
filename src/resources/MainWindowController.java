@@ -1,7 +1,6 @@
 package resources;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -13,6 +12,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,13 +25,16 @@ public class MainWindowController {
     public Button saveFilterButton;
     public Label saveFilterLabel;
     public AnchorPane mainWindow;
+    public CheckBox portalCheckBox;
+    public Label portalLabel;
     int fontSize = 12;
     Font poeFont = Font.loadFont(getClass().getResourceAsStream("/resources/Fontin-Regular.ttf"), fontSize);
 
     Scanner sc;
     File selectedFile;
     List<String> linesInFile;
-    ArrayList<Integer> findItemInList;
+    ArrayList<Integer> itemsInFile;
+    HashMap<String, ArrayList<Integer>> itemMap = new HashMap<>();
 
     private void initComponents() {
 
@@ -59,10 +62,6 @@ public class MainWindowController {
 
                 findItem("Wisdom");
 
-                // --------- TESTING
-                //sSystem.out.println(linesInFile);
-                //System.out.println(findItemInList);
-                // ---------
                 sc.close();
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to Read File");
@@ -82,7 +81,7 @@ public class MainWindowController {
             for(String line: linesInFile) {
                 fw.write(line + System.lineSeparator());
             }
-            System.out.println("File Saved");
+            System.out.println("Filter Saved");
             fw.close();
         } catch(IOException e) {
             System.out.println("File not saved");
@@ -96,15 +95,15 @@ public class MainWindowController {
         Create empty arr list to store index of item in main List
         Loop over new list and if any items show 'Show', change state of checkBox to true
          */
-        findItemInList = new ArrayList<>();
+        itemsInFile = new ArrayList<>();
         for (String line : linesInFile) {
             if (line.contains(item) && line.contains("BaseType")) {
-                findItemInList.add(linesInFile.indexOf(line));
+                itemsInFile.add(linesInFile.indexOf(line));
             }
         }
 
-        for (int i = 0; i < findItemInList.size(); i++) {
-            for (int j = findItemInList.get(i); j >= 0; j--) {
+        for (int i = 0; i < itemsInFile.size(); i++) {
+            for (int j = itemsInFile.get(i); j >= 0; j--) {
                 if (linesInFile.get(j).contains("Show") && !linesInFile.get(j).startsWith("#")) {
                     wisdomCheckBox.setSelected(true);
                 }
@@ -148,8 +147,8 @@ public class MainWindowController {
     // if line starts with #, ignore else change show to hide
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
-            for (int i = 0; i < findItemInList.size(); i++) {
-                for(int j = findItemInList.get(i); j >= 0; j--) {
+            for (int i = 0; i < itemsInFile.size(); i++) {
+                for(int j = itemsInFile.get(i); j >= 0; j--) {
                     if (linesInFile.get(j).contains("Show") && !wisdomCheckBox.isSelected()) {
                         result = changeShowToHide(linesInFile.get(j));
                         linesInFile.set(j, result);
@@ -162,4 +161,24 @@ public class MainWindowController {
                 }
             }
     }
+
+    // TODO may need to add hashmap of arrlists for each item, I.E. "Wisdom", "wisdomArrList<Integer>
+    /*
+    public void portalCheckBoxStateChanged(ActionEvent actionEvent) {
+        String result = "";
+        for (int i = 0; i < findItemInList.size(); i++) {
+            for(int j = findItemInList.get(i); j >= 0; j--) {
+                if (linesInFile.get(j).contains("Show") && !portalCheckBox.isSelected()) {
+                    result = changeShowToHide(linesInFile.get(j));
+                    linesInFile.set(j, result);
+                    break;
+                } else if(linesInFile.get(j).contains("Hide") && portalCheckBox.isSelected()) {
+                    result = changeHideToShow(linesInFile.get(j));
+                    linesInFile.set(j, result);
+                    break;
+                }
+            }
+        }
+    }
+   */
 }
