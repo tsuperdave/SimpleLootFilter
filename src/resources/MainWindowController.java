@@ -147,19 +147,22 @@ public class MainWindowController {
     // if line starts with #, ignore else change show to hide
     public void wisdomCheckBoxStateChanged(ActionEvent actionEvent) {
         String result = "";
-            for (int i = 0; i < itemsInFile.size(); i++) {
-                for(int j = itemsInFile.get(i); j >= 0; j--) {
-                    if (linesInFile.get(j).contains("Show") && !wisdomCheckBox.isSelected()) {
-                        result = changeShowToHide(linesInFile.get(j));
-                        linesInFile.set(j, result);
-                        break;
-                    } else if(linesInFile.get(j).contains("Hide") && wisdomCheckBox.isSelected()) {
-                        result = changeHideToShow(linesInFile.get(j));
-                        linesInFile.set(j, result);
-                        break;
-                    }
+        for (int i = 0; i < itemsInFile.size(); i++) {
+            for(int j = itemsInFile.get(i); j >= 0; j--) {
+                if (linesInFile.get(j).contains("Show") && !wisdomCheckBox.isSelected()) {
+                    result = changeShowToHide(linesInFile.get(j));
+                    linesInFile.set(j, result);
+                    break;
+                } else if(linesInFile.get(j).contains("Hide") && wisdomCheckBox.isSelected()) {
+                    result = changeHideToShow(linesInFile.get(j));
+                    linesInFile.set(j, result);
+                    break;
                 }
             }
+        }
+    }
+
+    public void portalCheckBoxStateChanged(ActionEvent actionEvent) {
     }
 
     // TODO may need to add hashmap of arrlists for each item, I.E. "Wisdom", "wisdomArrList<Integer>
