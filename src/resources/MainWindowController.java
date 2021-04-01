@@ -51,7 +51,7 @@ public class MainWindowController {
                 }
 
                 findItem("Wisdom");
-                findItem("Portal Scroll");
+                findItem("Portal");
 
                 sc.close();
             } catch (FileNotFoundException e) {
@@ -88,18 +88,21 @@ public class MainWindowController {
             if (line.contains(item) && line.contains("BaseType")) {
                 findItemList.add(linesInFile.indexOf(line));
                 itemMap.putIfAbsent(item, findItemList);
+
+                if(line.contains("Show")) {
+                    setCheckBoxState(item);
+                }
             }
         }
-        setCheckBoxState(item);
     }
 
     public void setCheckBoxState (String item) {
-        String nameOfCheckBoxObj = wisdomCheckBox.getText();
-        String nameOfPortalBoxObj = portalCheckBox.getText();
+        String nameOfCheckBoxObj = wisdomCheckBox.getId().substring(0, item.length());
+        String nameOfPortalBoxObj = portalCheckBox.getId().substring(0, item.length());
 
-        if(nameOfCheckBoxObj.contains(item.toLowerCase()) && !item.startsWith("#")) {
+        if(nameOfCheckBoxObj.equals(item.toLowerCase()) && !item.startsWith("#")) {
             wisdomCheckBox.setSelected(true);
-        } else if (nameOfPortalBoxObj.contains(item.toLowerCase()))
+        } else if (nameOfPortalBoxObj.equals(item.toLowerCase()))
             portalCheckBox.setSelected(true);
     }
 
